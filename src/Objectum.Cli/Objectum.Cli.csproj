@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AppSettingsPath>appsettings.json</AppSettingsPath>
+    <F Condition="$([System.IO.File]::ReadAllText('$(AppSettingsPath)').Contains('%22F%22')) == 'true'">true</F>
+    <H Condition="$([System.IO.File]::ReadAllText('$(AppSettingsPath)').Contains('%22H%22')) == 'true'">true</H>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(F)'=='true'">
+    <DefineConstants>$(DefineConstants);F</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(H)'=='true'">
+    <DefineConstants>$(DefineConstants);H</DefineConstants>
+  </PropertyGroup>
+
+</Project>
