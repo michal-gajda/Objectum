@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project InitialTargets="FizzBuzz" Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -6,16 +6,21 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AppSettingsPath>appsettings.json</AppSettingsPath>
-    <F Condition="$([System.IO.File]::ReadAllText('$(AppSettingsPath)').Contains('%22F%22')) == 'true'">true</F>
-    <H Condition="$([System.IO.File]::ReadAllText('$(AppSettingsPath)').Contains('%22H%22')) == 'true'">true</H>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(F)'=='true'">
-    <DefineConstants>$(DefineConstants);F</DefineConstants>
-  </PropertyGroup>
+  <Target Name="FizzBuzz">
+    <PropertyGroup>
+      <F Condition="$([System.IO.File]::ReadAllText('$(AppSettingsPath)').Contains('%22F%22')) == 'true'">true</F>
+      <H Condition="$([System.IO.File]::ReadAllText('$(AppSettingsPath)').Contains('%22H%22')) == 'true'">true</H>
+    </PropertyGroup>
 
-  <PropertyGroup Condition="'$(H)'=='true'">
-    <DefineConstants>$(DefineConstants);H</DefineConstants>
-  </PropertyGroup>
+    <PropertyGroup Condition="'$(F)'=='true'">
+      <DefineConstants>$(DefineConstants);F</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(H)'=='true'">
+      <DefineConstants>$(DefineConstants);H</DefineConstants>
+    </PropertyGroup>
+  </Target>
 
 </Project>
